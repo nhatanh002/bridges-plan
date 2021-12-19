@@ -12,11 +12,11 @@ Notes on chainbridges implementation approaches and design space
     * generalized:
       - full-fledged protocol designed for transferring information accross chains. Huge upfront cost, most flexible, most complex.
   * Cross-chain validators network:
-    * "Mailbox"-validators:
+    * Mailbox-Monitors:
       - On the source chain, there's a "mailbox" account monitored by a federation of
-        validators/signers, When a transaction to the mailbox is acknowledged on the
-        source chain, the validators perform actions accordingly on the destination chain,
-        usually by minting an equivalent of the asset on the dest chain, example:
+        monitor nodes, When a transaction to the mailbox is acknowledged on the source
+        chain, the monitors perform actions accordingly on the destination chain, usually
+        by minting an equivalent of the asset on the dest chain, example:
         [ChainSafe](https://github.com/ChainSafe/ChainBridge)
     * Light clients-relays:
       - Actors (not necessarily validators) must generate cryptographic proof about past

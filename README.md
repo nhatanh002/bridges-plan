@@ -9,6 +9,7 @@ to revision-control it.
 ## Repo map
 
 * *background.md*: Background information and research
+* *proposal.md*: Current solution proposal
 * *chart-sources/*: Contains Mermaid source code to generate the charts and graphs used in
   this repos
 * *README.md*: The "index" of the repo. This file btw.
