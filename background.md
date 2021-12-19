@@ -40,3 +40,24 @@ Notes on chainbridges implementation approaches and design space
     * Bonded: malicious actors' collaterals are burned, user does not recover funds.
     * Trusted: dependent on the reputation of the bridge operator. Operating nodes are
       most likely closed and private.
+
+Key management approaches
+=========================
+
+The problem: you are in charge of securely storing your users' private keys and use these to sign
+transactions, and somehow prevent possible malicious actors inside of your own operation
+to compromise the private keys. 
+
+Of course, to be securely stored the private keys should be encrypted, so the problem
+boils down to how to securely store the "master key" used to decrypt the private keys.
+A stricter requirement would be to securely store the master key in a threshold scheme
+such that it's only possible to reconstruct the secret master key with every share of the
+secret master key available, i.e. the users' keys are secure as long as the whole
+organization itself is not completely compromised, which is a moot point in a custodial
+wallet scheme in the first place. References:
+[Secret sharing](https://en.wikipedia.org/wiki/Secret_sharing), [Shamir's secret sharing](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing)
+
+A less contrived and probably the usual approach is to store the master key in a medium
+trusted to be secure, managed by a trusted party, and that trusted party supplies it to
+the process doing the transaction signing at startup so it could decrypt the users'
+private keys.
