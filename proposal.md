@@ -2,7 +2,7 @@ Chainbridge solution
 ====================
 
 For the time being, a reasonably sufficent design choice for the bridge would be the
-Mailbox-Monitor approach, with contracts on both chains implementing
+Mailbox-Monitor approach (see *background.md* for more details), with contracts on both chains implementing
 lock&mint/burn&release operations in both direction. The "mailbox" account on each chain
 would also be the corresponding contract's account.
 
