@@ -30,13 +30,15 @@ graph LR
     
 
 User-----> |1 redeem z W_ETH from Welups to Ethereum|G
-G -- 2 process redeem request --> WW
-WW-- 2.1 burn z W_ETH -->C2
-C2-..->|2.1.1 burn z W_ETH|W3
-C2-..->|2.1.2 Burned event|G
+G-- 2 process redeem request -->WW
+WW-- 2.1 retrieve User's private key -->DB
+DB-- 2.1 User's private key -->WW
+WW-- 2.2 burn z W_ETH -->C2
+C2-..->|2.2.1 burn z W_ETH|W3
+C2-..->|2.2.2 Burned event|G
 
-G-- 3 request to release z ETH to User's account --> C1
-C1-..->|3.1 Unlock and transfer z ETH to User's account | W2
-W2-..->|3.1 z ETH| W1
+G-- 3 request to release z ETH to User's Ethereum account -->C1
+C1-..->|3.1 Unlock and transfer z ETH to User's account|W2
+W2-..->|3.1 z ETH|W1
 C1-..->|3.2 Withdraw event|G
 User<-----|4 Transfer succeeded|G
