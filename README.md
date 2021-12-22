@@ -10,6 +10,7 @@ to revision-control it.
 
 * *background.md*: Background information and research
 * *proposal.md*: Current solution proposal
-* *chart-sources/*: Contains Mermaid source code to generate the charts and graphs used in
+* *chart-sources/* : Contains Mermaid source code to generate the charts and graphs used in
   this repos
+* *assets/* : Contains images for charts/graphs and other assets
 * *README.md*: The "index" of the repo. This file btw.
