@@ -2,15 +2,13 @@ Chainbridge solution
 ====================
 
 For the time being, a reasonably sufficent design choice for the bridge would be the
-Mailbox-Monitor approach (see *background.md* for more details), with contracts on both chains implementing
-lock&mint/burn&release operations in both direction. The "mailbox" account on each chain
-would also be the corresponding contract's account.
+Mailbox-Monitor approach (see *background.md* for more details), with contracts on both
+chains implementing lock&mint/burn&release operations in both direction. The "mailbox"
+account on each chain would also be the corresponding contract's account.
 
 The ETH-to-Welups flow would be like this:
-  * User A chooses to transfer x ETHs to Welups chain, as x W_ETHs
-  * minted tokens representing x ETHs.
-  * A `send()` transaction to transfer x ETH from the user's wallet to the contract
-  * ("mailbox") account is initiated on Ethereum.
+  * User A chooses to transfer x ETHs to Welups chain, as x W_ETHs minted tokens representing x ETHs.
+  * A `send()` transaction to transfer x ETH from the user's wallet to the contract ("mailbox") account is initiated on Ethereum.
   * The contract upon receiving x ETHs locks them and emits `Deposited` event
   * The monitor upon hearing `Deposited` calls the contract on Welups to mint x W_ETHs tokens
     - If succeeded, transfers those to user A's balance, goto next step.
