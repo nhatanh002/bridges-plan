@@ -1,14 +1,8 @@
-graph LR
-    subgraph ETH [Ethereum chain]
-     Head1[...]-->A1[BLOCK]-->B1[BLOCK]-->Tail1[...]    
-     C1[[Contract]]
-     W1{User's wallet}
-     W2{Contract's wallet}          
-    end
-
-    User((User))
-    
+graph RL
+    User((User)) 
+    subgraph _
     subgraph BRD [Bridge]
+
      G[Gateway]-..-P1     
      G-..-P2
      G-..-Px
@@ -20,11 +14,19 @@ graph LR
         end               
     end
 
+    subgraph ETH [Ethereum chain]
+     Head1[...]-->A1[BLOCK]-->B1[BLOCK]-->Tail1[...]    
+     C1[[Contract]]
+     W1{User's wallet}
+     W2{Contract's wallet}          
+    end
+
     subgraph WEL [Welups chain]
      Head2[...]-->A2[BLOCK]-->B2[BLOCK]-->Tail2[...]
      C2[[Contract]]
      W3{User's wallet}
     end    
+    end
 
 User-- 1 deposit x ETH to Welups -->G
 G -- 2 process deposit request --> P1
