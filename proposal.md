@@ -28,11 +28,16 @@ The ETH-to-Welups flow would be like this:
   
 The other Welups-to-Eth direction should be the more or less the same.
 
+Below are the charts illustrating this flow:
+
 ### ETH-to-Welups deposit flow
 ![deposit eth](./assets/deposit-eth.svg)
 
 ### Welups-to-ETH release flow
 ![release eth](./assets/release-eth.svg)
+
+### User interface
+A rudimentary UI/UX wireframe can be found [here](https://ninjamock.com/s/S63LNJx)
 
 Key management solution proposal
 ================================
