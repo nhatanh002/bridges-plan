@@ -1,0 +1,44 @@
+graph LR
+    subgraph ETH [Ethereum chain]
+     Head1[...]-->A1[BLOCK]-->B1[BLOCK]-->Tail1[...]    
+     C1[[Contract]]
+     W1{User's wallet}
+     W2{Contract's wallet}          
+    end
+
+    User((User))
+    
+    subgraph BRD [Bridge]
+     G[Gateway]-..-P1     
+     G-..-P2
+     G-..-Px
+        subgraph P [Processors]
+        DB[(Keyvault)]
+        P1[Node1]
+        P2[Node2]
+        Px[...]    
+        end               
+    end
+
+    subgraph WEL [Welups chain]
+     Head2[...]-->A2[BLOCK]-->B2[BLOCK]-->Tail2[...]
+     C2[[Contract]]
+     W3{User's wallet}
+    end    
+
+User-- 1 deposit x ETH to Welups -->G
+G -- 2 process deposit request --> P1
+P1-- 2.1 retrieve User's pk --> DB
+DB-..->|User's pl|P1
+P1-- 2.2 deposit x ETH -->C1
+C1-..->|2.2.1 charge x Eth|W1
+W1-..->|x ETH|W2
+W2-..->|2.2.2 transfer succeeded|C1
+C1-..->|2.2.3 lock x Eth|W2
+C1-..->|2.2.4 Deposited event|P1
+
+P1-- 2.3 mint x W_ETH tokens --> C2
+C2-..->|2.3.1 issue x W_ETH tokens for user| W3
+C2-..->|2.3.2 Minted event|P1
+P1-- 2.4 Transfer succeeded -->G
+G-- 2.5 notify User --> User
