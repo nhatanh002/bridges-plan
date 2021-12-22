@@ -1,0 +1,42 @@
+graph LR
+    User((User )) 
+    subgraph BRD [Bridge]
+
+    G[Gateway]
+         
+    end
+    subgraph _   
+
+    subgraph ETH [Ethereum chain]
+     Head1[...]--->A1[BLOCK]-->B1[BLOCK]--->Tail1[...]    
+     C1[[Contract]]
+     W1{User's Account}
+     W2{Contract's Account}          
+    end
+
+    subgraph WEL [Welups chain]
+     Head2[...]--->A2[BLOCK]-->B2[BLOCK]--->Tail2[...]
+     C2[[Contract]]
+     W3{User's Welups Account}
+    end
+    end
+    subgraph __
+     MM[Metamask]
+     subgraph WWS[Welups Wallet]
+       WW[Welups Wallet service]
+       DB[(Keyvault)]
+     end
+    end
+    
+
+User-----> |1 redeem z W_ETH from Welups to Ethereum|G
+G -- 2 process redeem request --> WW
+WW-- 2.1 burn z W_ETH -->C2
+C2-..->|2.1.1 burn z W_ETH|W3
+C2-..->|2.1.2 Burned event|G
+
+G-- 3 request to release z ETH to User's account --> C1
+C1-..->|3.1 Unlock and transfer z ETH to User's account | W2
+W2-..->|3.1 z ETH| W1
+C1-..->|3.2 Withdraw event|G
+User<-----|4 Transfer succeeded|G

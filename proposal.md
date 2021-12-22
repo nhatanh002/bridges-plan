@@ -33,6 +33,9 @@ The other Welups-to-Eth direction should be the more or less the same.
 ### ETH-to-Welups deposit flow
 ![deposit eth](./assets/deposit-eth.svg)
 
+### Welups-to-ETH release flow
+![release eth](./assets/release-eth.svg)
+
 Key management solution proposal
 ================================
 
