@@ -30,8 +30,8 @@ The ETH-to-Welups flow would be like this:
   
 The other Welups-to-Eth direction should be the more or less the same.
 
-(Chart coming soon...)
-![deposit eth](./assets/deposit-eth.png)
+### ETH-to-Welups deposit flow
+![deposit eth](./assets/deposit-eth.svg)
 
 Key management solution proposal
 ================================
