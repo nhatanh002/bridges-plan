@@ -7,29 +7,34 @@ chains implementing lock&mint/burn&release operations in both direction. The "ma
 account on each chain would also be the corresponding contract's account.
 
 The ETH-to-Welups flow would be like this:
-  * User A chooses to transfer x ETHs to Welups chain, as x W_ETHs minted tokens representing x ETHs.
-  * A `send()` transaction to transfer x ETH from the user's wallet to the contract ("mailbox") account is initiated on Ethereum.
-  * The contract upon receiving x ETHs locks them and emits `Deposited` event
-  * The monitor upon hearing `Deposited` calls the contract on Welups to mint x W_ETHs tokens
-    - If succeeded, the contract transfers those to user A's balance, emit `Minted` event.
-      The monitor upon receiving `Minted` event would notify the user that their deposit has 
-      succeeded.
-    - If failed, emits `MintFailure` event, the monitor then calls the contract on
-         Ethereum to release A's x ETHs and sends them back
-         to A, notifies A of the failure, end.
-  * A then uses y W_ETHs to make transactions on Welups, x - y = z W_ETHs remaining in A's possession
-  * A redeems z W_ETHs, the contract on Welups is called to burn z W_ETHs, then emits
-    `Burned` event
-  * Upon hearing `Burned` event, the monitor calls the contract on Ethereum end to release z
-     ETHs and sends them back to A's wallet
-     - If succeeded, Ethereum contract would emit a `Withdraw` event, upon receiving this
-       event the monitor would notify user A that their W_ETHs have been redeemed into
-       ETHs, end.
-     - If failed, locks z ETHs again, emits `ReleaseFailure` event, the monitor then calls
-          the contract on Welups to mint z W_ETHs and transfers back to A's Welups wallet,
-          notifies A of the failure, end.
+#### Deposit flow
+* (1) deposit x ETH to Welups
+* (2) process deposit request 
+  * (2.1) deposit x ETH 
+    * (2.1.1) charge x Eth
+    * (2.1.2) lock x Eth
+    * (2.1.3) Deposited event
+* (3) request to mint x W_ETH tokens
+  * (3.1) retrieve User's private key to sign transaction
+  * (3.2) mint x W_ETH tokens
+    * (3.2.1) issue x W_ETH tokens for user
+    * (3.2.2) Minted event
+* (4) Transfer succeeded
   
-The other Welups-to-Eth direction should be the more or less the same.
+#### Withdraw flow
+* (1) redeem z W_ETH from Welups to Ethereum
+* (2) process redeem request
+  * (2.1) retrieve User's private key
+  * (2.2) burn z W_ETH
+    * (2.2.1) burn z W_ETH
+    * (2.2.2) Burned event
+* (3) request to release z ETH to User's Ethereum account
+  * (3.1) Unlock and transfer z ETH to User's account
+  * (3.1) z ETH
+  * (3.2) Withdraw event
+* (4) Transfer succeeded
+
+The other Welups-to-Eth direction should be the same.
 
 Below are the charts illustrating this flow:
 
