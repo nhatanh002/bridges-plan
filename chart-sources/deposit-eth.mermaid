@@ -29,19 +29,19 @@ graph LR
     end
 
 
-User-----> |1 deposit x ETH to Welups|G
-G -- 2 process deposit request --> MM
-MM-- 2.1 deposit x ETH -->C1
-C1-..->|2.1.1 charge x Eth|W1
-W1-..->|2.1.1 x ETH|W2
-W2-..->|2.1.1 transfer succeeded|C1
-C1-..->|2.1.2 lock x Eth|W2
-C1-..->|2.1.3 Deposited event|G
+User-----> |"(1) deposit x ETH to Welups"|G
+G -- "(2) process deposit request "--> MM
+MM-- "(2.1) deposit x ETH "-->C1
+C1-..->|"(2.1.1) charge x Eth"|W1
+W1-..->|"(2.1.1) x ETH"|W2
+W2-..->|"(2.1.1) transfer succeeded"|C1
+C1-..->|"(2.1.2) lock x Eth"|W2
+C1-..->|"(2.1.3) Deposited event"|G
 
-G-- 3 request to mint x W_ETH tokens --> WW
-WW-- 3.1 retrieve User's private key to sign transaction --> DB
-DB-..->|3.1 User's private key| WW
-WW-- 3.2 mint x W_ETH tokens --> C2
-C2-..->|3.2.1 issue x W_ETH tokens for user| W3
-C2-..->|3.2.2 Minted event|G
-User<----|4 Transfer succeeded|G
+G-- "(3) request to mint x W_ETH tokens" --> WW
+WW-- "(3.1) retrieve User's private key to sign transaction" --> DB
+DB-..->|"(3.1) User's private key"| WW
+WW-- "(3.2) mint x W_ETH tokens" --> C2
+C2-..->|"(3.2.1) issue x W_ETH tokens for user"| W3
+C2-..->|"(3.2.2) Minted event"|G
+User<----|"(4) Transfer succeeded"|G
